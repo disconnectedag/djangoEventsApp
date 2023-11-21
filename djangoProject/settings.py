@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 if 'DATABASE_URL' in os.environ:
-    # heroku db
+    # heroku
     DATABASES = {'default': dj_database_url.config()}
 else:
     # local machine
