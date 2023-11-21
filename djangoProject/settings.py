@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 from django.conf.global_settings import STATICFILES_DIRS
 
@@ -81,17 +82,21 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "cs5774db",
-        "USER": "postgres",
-        "PASSWORD": "freckles13",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+if 'DATABASE_URL' in os.environ:
+    # heroku db
+    DATABASES = {'default': dj_database_url.config()}
+else:
+    # local machine
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "cs5774db",
+            "USER": "postgres",
+            "PASSWORD": "freckles13",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
     }
-}
 
 
 # Password validation
