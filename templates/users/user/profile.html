@@ -1,0 +1,120 @@
+{% extends "myEventsApp/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+{% block page-title %}Profile For {{ user.username }}{% endblock %}
+{% block content %}
+    <div class="wrapper">
+
+        <a href="{% url 'myEventsApp:events_list' %}" class="back-btn">
+            <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+        </a>
+        {% if request.session.username == user.username and request.session.role != 'admin'%}
+            <form id="profile-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="form-control" name="username" value="{{ user.username }}"
+                           required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">First name:</label>
+                    <input type="text" id="firstname" class="form-control" name="firstname"
+                           value="{{ user.first_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last name:</label>
+                    <input type="text" id="lastname" class="form-control" name="lastname" value="{{ user.last_name }}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="form-control" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" class="form-control" name="new_password">
+                    <small class="form-text text-muted">Leave blank if you do not wish to change the password.</small>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio_display" id="exampleRadios1"
+                               value="registered_user"
+                               {% if user.details.role == "registered_user" %}checked{% endif %} disabled>
+                        <label class="form-check-label" for="exampleRadios1">
+                            Regular User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio_display" id="exampleRadios2"
+                               value="admin" {% if user.details.role == "admin" %}checked{% endif %} disabled>
+                        <label class="form-check-label" for="exampleRadios2">
+                            Admin
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" name="roleRadio" value="{{ user.details.role }}">
+                <button type="submit" class="btn btn-primary">Change User</button>
+            </form>
+
+        {% elif request.session.role == 'admin' %}
+            <form id="profile-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="form-control" name="username" value="{{ user.username }}"
+                           required disabled>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">First name:</label>
+                    <input type="text" id="firstname" class="form-control" name="firstname"
+                           value="{{ user.first_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last name:</label>
+                    <input type="text" id="lastname" class="form-control" name="lastname" value="{{ user.last_name }}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="form-control" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" class="form-control" name="new_password">
+                    <small class="form-text text-muted">Leave blank if you do not wish to change the password.</small>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios1"
+                               value="registered_user"
+                               {% if user.details.role == "registered_user" %}checked{% endif %} >
+                        <label class="form-check-label" for="exampleRadios1">
+                            Regular User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios2"
+                               value="admin" {% if user.details.role == "admin" %}checked{% endif %} >
+                        <label class="form-check-label" for="exampleRadios2">
+                            Admin
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Change User</button>
+            </form>
+        {% else %}
+            <h2>Profile for {{ user.username }}</h2>
+            <dl class="profile-list">
+                <dt>Username:</dt>
+                <dd>{{ user.username }}</dd>
+                <dt>Email:</dt>
+                <dd>{{ user.email }}</dd>
+                <dt>Role:</dt>
+                <dd>{{ user.details.role }}</dd>
+            </dl>
+        {% endif %}
+    {% include 'actions/action/feed.html' %}
+    </div>
+{% endblock %}

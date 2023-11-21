@@ -1,0 +1,110 @@
+.event-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event-card img {
+  width: 100%;
+  height: auto;
+}
+
+.event-info {
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.event-info h2 {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.event-info p {
+  margin: 10px 0;
+}
+
+.event-info .event-date,
+.event-info .event-time,
+.event-info .event-location {
+  font-weight: bold;
+}
+
+.event-info .event-description {
+  line-height: 1.4;
+}
+
+#see-all-link {
+  color: black;
+  text-decoration: underline;
+  position: absolute;
+  top: -32px;
+  right: 32px;
+}
+
+#see-all-link:hover {
+  color: var(--light-color);
+}
+
+.back-btn {
+  width: fit-content;
+  top: 0;
+  padding: 8px;
+  background-color: var(--primary-color-dark);
+  border-radius: 50%;
+}
+
+.back-btn:hover {
+  cursor: pointer;
+}
+
+.login-btn {
+  padding: 4px 8px;
+  font-weight: 700;
+  background-color: transparent;
+}
+.login-btn:hover {
+  cursor: pointer;
+}
+
+.sign-up-btn {
+  text-decoration: none;
+  background-color: var(--primary-color);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+}
+.sign-up-btn:hover {
+  cursor: pointer;
+  color: hsl(17, 90%, 92%);
+  text-decoration: none;
+}
+.logged-in-container {
+  display: flex;
+  align-items: center;
+}
+
+.img-container {
+  border-radius: 50%;
+}
+.img-container img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.icon-w-msg {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.bar-icons {
+  cursor: pointer;
+}

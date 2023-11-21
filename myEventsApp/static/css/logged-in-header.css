@@ -1,0 +1,50 @@
+.logged-in-container {
+  display: flex;
+  align-items: center;
+}
+
+.img-container {
+  border-radius: 50%;
+}
+.img-container img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.icon-w-msg {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.nav-row {
+  display: flex;
+  margin: 1rem 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.nav-row button {
+  font-size: 1.5rem;
+  width: fit-content;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+.nav-row button:hover {
+  cursor: pointer;
+  color: var(--darker-gray);
+}
+
+@media (max-width: 768px) {
+  .logged-in-container {
+    display: none;
+  }
+  .hamburger-menu {
+    display: inline-block;
+  }
+}

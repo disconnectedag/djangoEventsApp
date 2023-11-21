@@ -1,0 +1,124 @@
+.wrapper {
+  display: flex;
+  margin: 2rem 4rem;
+}
+.events-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.event-list {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.event {
+  background-color: #f7f7f7;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event h2 {
+  margin: 0;
+}
+
+.events-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.event-list {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-image {
+  width: 300px;
+  object-fit: fill;
+}
+
+.event-image img {
+  width: 100%;
+  height: auto;
+}
+
+.event h2 {
+  margin: 0;
+}
+.event-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bar-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.event-info a {
+  text-decoration: none;
+  color: black;
+}
+
+.event-info a:hover {
+  cursor: pointer;
+  color: var(--darker-gray);
+}
+.event-info a:hover h2 {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .calendar-widget {
+    display: none;
+  }
+  .events-container {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .event {
+    flex-direction: column;
+  }
+}
+
+#concert-event {
+  display: none;
+}
+.group-members {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.avatar img {
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar p {
+  width: 80px;
+  text-align: center;
+}
+
+

@@ -1,0 +1,70 @@
+.event-form {
+  width: 50%;
+  margin: 1rem auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input[type='text'],
+input[type='datetime-local'],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-group input[type='submit'] {
+  background-color: hsl(211, 100%, 50%);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-group input[type='checkbox'] {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+.hamburger-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .logged-in-container {
+    display: none;
+  }
+  .hamburger-menu {
+    display: inline-block;
+  }
+  .event-form {
+    margin: 0;
+    width: 100%;
+  }
+}

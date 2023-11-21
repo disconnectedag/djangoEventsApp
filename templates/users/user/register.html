@@ -1,0 +1,62 @@
+{% extends "myEventsApp/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load bootstrap4 %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/create-event.css' %}"/>
+{% endblock %}
+{% block page-title %}Register User{% endblock %}
+{% block content %}
+    <main>
+        <div class="event-form">
+            <a href="{% url 'events:events_list' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+            </a>
+            <h1>Register User</h1>
+            <form method="POST" action="{% url 'users:register' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" class="form-control" id="register-username" name="username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" required/>
+                </div>
+                <div class="form-group">
+                    <label for=lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" required/>
+                </div>
+
+                    <h3>User Role</h3>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios1"
+                               value="registered_user" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            Regular User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios2"
+                               value="admin">
+                        <label class="form-check-label" for="exampleRadios2">
+                            Admin
+                        </label>
+                    </div>
+
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" class="form-control" id="register-email" name="email" required/>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" class="form-control" id="register-password" name="password" required/>
+                </div>
+
+                <div class="form-group">
+                    <input id="ce-btn" class="form-control" type="submit" value="Register"/>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

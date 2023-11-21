@@ -1,0 +1,209 @@
+{% extends "myEventsApp/base.html" %}
+{% load humanize %}
+{% load static %}
+{% block page-title %}Event Listings{% endblock %}
+{% block css %}
+    <script src="{% static '/js/calendar.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/loggedout-listings.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}"/>
+{% endblock %}
+{% block content %}
+    <main>
+        {% block listings %}
+            <div class="wrapper">
+                <div class="events-container">
+                    {% block events-list %}
+                        {% if request.session.username %}
+                            <div class="events-header">
+                            <h1>Hey {{ request.session.username }}!</h1>
+                            {% if request.session.role == 'admin' %}
+                                <h5>Change the roles of users here: <a href="{% url 'users:admin_view' %}">Admin Panel</a></h5>
+
+                            {% endif %}
+                            <h2>
+                                <strong>Explore events near you!</strong>
+                                <br>
+                                or Create your own
+                                event:
+                                <a class="sign-up-btn" href="{% url 'myEventsApp:create_event' %}">Create Event</a>
+                            </h2>
+                            <!-- search events form -->
+                            <form action="#" method="get">
+                                <input
+                                        type="search"
+                                        name="search-events"
+                                        id="search-events-input"
+                                />
+                                <input type="submit" value="Search" name="Search"/>
+                            </form>
+                            <div class="nav-row">
+                                <button>Discover</button>
+                                <button>Friends</button>
+                                <span>
+                                <label for="groups">
+                                  <button>Groups:</button>
+                                </label>
+                                <select name="group-select" id="groups">
+                                  <option value="none">--Select a Group--</option>
+                                  <option value="nature-group">Nature People</option>
+                                  <option value="concert-group">Concert Lovers</option>
+                                  <option value="tennis-group">Tennis Players</option>
+                                  <option value="city-explorer">City Explorers</option>
+                                </select>
+                             </span>
+                            </div>
+                        {% else %}
+                            <div class="events-header">
+                            <h1>Explore your city!</h1>
+                            <h2>Events near <strong ID="city">Great Falls, VA</strong></h2>
+                            <!-- search events form -->
+                            <form action="./search-results.html" method="get">
+                                <input
+                                        type="search"
+                                        name="search-events"
+                                        id="search-events-input"
+                                />
+                                <input type="submit" value="Search" name="Search"/>
+                            </form>
+                        {% endif %}
+
+                    <form action="{% url 'events:sorted-events_list' %}">
+                        <input id="sort-oldest" value="Sort By Oldest" type="submit">
+                    </form>
+
+                    </div>
+                        <div class="event-list">
+                            {% if events.count == 0 %}
+                                <div class="event">
+                                    <p>Sorry there are no events at this time!</p>
+                                </div>
+                            {% endif %}
+                            {% for event in events %}
+                                <div class="event">
+                                    <div class="event-image">
+
+                                        {% if event.image %}
+                                            <img src="{{ event.image.url }}" alt="event image"/>
+                                        {% endif %}
+                                    </div>
+                                    <div class="event-info">
+                                        {% if request.session.username == "admin" %}
+                                            <div class="admin-icons">
+                                                <a href="{% url 'myEventsApp:edit_event' event.id %}"><i
+                                                        class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                                                <a href="{% url 'myEventsApp:delete_event_confirm' event.id %}"><i
+                                                        class="fa-solid fa-x fa-lg"></i></a>
+                                            </div>
+                                        {% elif request.session.username == event.user.username %}
+                                            <div class="admin-icons">
+                                                <a href="{% url 'myEventsApp:edit_event' event.id %}"><i
+                                                        class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                                            </div>
+                                        {% endif %}
+                                        <a href="{% url "myEventsApp:event_details" event.id %}">
+                                            <h2>{{ event.title }}</h2>
+                                            <p>Date: {{ event.event_date }}</p>
+                                            <p>Location: {{ event.location }}</p>
+                                            <p>
+                                                {{ event.description }}
+                                            </p>
+                                        </a>
+                                        <p>Hosted by: <a
+                                                href="{% url 'users:profile' event.user.username %}">{{ event.user.username }}</a>
+                                        </p>
+                                        <div class="event-bar">
+                                            <p>Posted: <strong>{{ event.date_posted|naturaltime }}</strong></p>
+
+                                            <div class="bar-icons">
+                                                <p>{{ event.attendees }} Attendees</p>
+                                                <i class="fa-solid fa-share fa-lg"></i>
+                                                <i class="fa-regular fa-bookmark fa-lg"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endblock %}
+                    </div>
+
+                    <div class="calendar-widget">
+                        {% block calendar %}
+                            <div class="calendar-header">
+                                <button class="prev-month-btn">Prev</button>
+                                <h2 class="current-month">October 2023</h2>
+                                <button class="next-month-btn">Next</button>
+                            </div>
+                            <table class="calendar" data-ajax-url="{% url 'events:calendar_display' %}">
+                                <thead>
+                                <tr>
+                                    <th>Sun</th>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>22</td>
+                                    <td>23</td>
+                                    <td>24</td>
+                                    <td>25</td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>27</td>
+                                    <td>28</td>
+                                    <td>29</td>
+                                    <td>30</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="events-display">
+                                <h3 class="title-side-events">
+                                    Events on <strong id="day">5th</strong>
+                                </h3>
+                            </div>
+                        {% endblock %}
+                    </div>
+
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+{% endblock %}

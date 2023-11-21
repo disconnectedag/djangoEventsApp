@@ -1,0 +1,125 @@
+:root {
+  --primary-color: hsl(15, 75%, 53%);
+  --primary-color-dark: hsl(211, 91%, 79%);
+  --primary-light-blue: hsl(208, 100%, 97%);
+  --primary-background-color: whitesmoke;
+  --secondary-background-color: hsl(0, 100%, 74%);
+  --secondary-btn-color: hsl(0, 100%, 95%);
+  --primary-btn-color: hsl(0, 100%, 74%);
+  --card-background-color: hsl(0, 0%, 90%);
+  --light-color: hsl(0, 0%, 78%);
+  --light-background: hsl(0, 0%, 95%);
+  --action-button-blue: hsl(211, 100%, 50%);
+  --darker-gray: hsl(0, 0%, 50%);
+}
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+}
+
+main {
+  min-height: 100%
+}
+
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--light-background);
+}
+
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/*
+  8. Avoid text overflows
+*/
+p {
+  font-family: 'Inter';
+  overflow-wrap: break-word;
+}
+
+button {
+  border: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+.messages {
+  font-weight: bold;
+  padding: 1em;
+  list-style: none;
+}
+
+.success {
+  background-color: lightgreen;
+  padding: 1em;
+}
+
+.info {
+  background-color: lightblue;
+  padding: 1em;
+}
+
+.warning {
+  background-color: #ff9797;
+  padding: 1em;
+}

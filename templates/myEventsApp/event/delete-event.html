@@ -1,0 +1,15 @@
+{% extends "myEventsApp/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/delete-confirmation.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <h2>Are you sure you want to delete <strong>{{ event.title }}</strong>?</h2>
+        <form method="post">
+            {% csrf_token %}
+            <button class="sign-up-btn" type="submit">Yes, delete it</button>
+            <a href="{% url 'myEventsApp:events_list' %}">No, take me back</a>
+        </form>
+    </div>
+{% endblock %}

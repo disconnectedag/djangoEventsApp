@@ -1,0 +1,75 @@
+.hero-container {
+  padding: 2rem;
+  margin: 2rem 4rem 2rem 4rem;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 3px solid var(--light-color);
+  align-items: center;
+}
+.welcome-message {
+  max-width: 40%;
+  margin: 0 2.5rem;
+}
+.welcome-img img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  justify-self: center;
+}
+
+.join-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.join-btn:hover {
+  cursor: pointer;
+}
+
+.welcome-message h1 {
+  margin-bottom: 2rem;
+}
+
+.welcome-message p {
+  margin-bottom: 2rem;
+}
+
+.events-container {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 2rem;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .events-container {
+    flex-direction: column;
+  }
+  .hero-container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .welcome-message {
+    max-width: 100%;
+  }
+  /* .welcome-img img {
+    margin: 0 2rem 0 2rem;
+    max-width: 500px;
+    min-width: 200px;
+  } */
+}
+.event-info a {
+  text-decoration: none;
+  color: black;
+}
+
+.event-info a:hover {
+  cursor: pointer;
+  color: var(--darker-gray);
+}
+.event-info a:hover h2 {
+  text-decoration: underline;
+}

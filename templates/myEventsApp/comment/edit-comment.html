@@ -1,0 +1,17 @@
+{% extends "myEventsApp/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}"/>
+    <script src="{% static '/js/editComment.js' %}"></script>
+{% endblock %}
+{% block page-title %}Comment Edit Page{% endblock %}
+{% block content %}
+    <form method="POST" id="edit-form" data-ajax-url="{% url 'events:edit-comment' comment.id%}">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="comment-text">Comment Text</label>
+            <textarea class="form-control" id="comment-text">{{ comment.body }}</textarea>
+            <input type="submit" value="Save Changes"/>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- load JavaScript -->
+    <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static '/js/script.js' %}"></script>
+    <!-- google fonts -->
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=DM+Sans"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Inter"
+            rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <script
+            src="https://kit.fontawesome.com/3bc24ae9f6.js"
+            crossorigin="anonymous"
+    ></script>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/app-header.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/app-footer.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <title>Homepage</title>
+</head>
+<body>
+<!-- Header -->
+<header id="navbar">
+    <!-- logo -->
+    <a id="logo-link" href="./">
+        <img
+                src="{% static '/images/weekendr_logo.png' %}"
+                id="logo"
+                alt="weekendr logo"
+        />
+    </a>
+    <!-- login and sign up buttons -->
+    {% if request.session.username %}
+        <div class="logged-in-container">
+            <p>Logged in as <strong>{{ request.session.username }}</strong> | <a href="{% url 'users:logout' %}">Log
+                out</a></p>
+        </div>
+    {% else %}
+        <form class="login-box" action="{% url 'users:login' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="pw" placeholder="Password"/>
+            <span><input type="submit" name="submit" value="Log in"/> or <a href="{% url 'users:register' %}"
+                                                                            class="sign-up-btn">Sign Up</a></span>
+        </form>
+    {% endif %}
+    <div class="hamburger-menu">
+        <i class="fa-solid fa-bars fa-lg"></i>
+    </div>
+</header>
+<main>
+    <!-- Hero image and welcome message -->
+    <div class="hero-container">
+        <div class="welcome-message">
+            <h1>Where young professionals come alive in their new cities</h1>
+            <p>
+                Moving to a new city after college can be an intimidating
+                experience. We are here to help! Engage with other recent college
+                grads and young professionals, and start making your new city feel
+                like home.
+            </p>
+            {% if request.session.username %}
+                <h3>Welcome back {{ request.session.username }}!</h3>
+            {% else %}
+                <button class="join-btn">Join Now</button>
+            {% endif %}
+        </div>
+        <div class="welcome-img">
+            <img src="{% static '/images/hero.png' %}" alt="hero image"/>
+        </div>
+    </div>
+    <!-- show 3 events near their location -->
+    <div class="events-container">
+        <a id="see-all-link" href="./events"
+        >See all events</a
+        >
+        <div class="event-card">
+            <!-- https://www.oklahoman.com/gcdn/authoring/2020/06/01/NOKL/ghnewsok-OK-5664174-db3644ac.jpeg -->
+            <img src="{% static '/images/baseball-game.jpg' %}" alt="Event Image"/>
+            <div class="event-info">
+                <a href="./event.html">
+                    <h2>Baseball Game</h2>
+                    <p>Date: <span class="event-date">September 10, 2023</span></p>
+                    <p>Time: <span class="event-time">7:00 PM</span></p>
+                    <p>
+                        Location: <span class="event-location">Nationals Park</span>
+                    </p>
+                </a>
+                <p>Description:</p>
+                <p class="event-description">
+                    Lets go root root root for the home team! The Nats play this
+                    Thursday against the Baltimore Oriels at home. Tickets are only
+                    $5! Hope you can join us!
+                </p>
+            </div>
+        </div>
+        <!-- painting in the park event card -->
+        <div class="event-card">
+            <!-- https://www.nps.gov/common/uploads/grid_builder/arts/crop16_9/EF93F5C1-1DD8-B71B-0B45C3B17B641A17.jpg?width=640&quality=90&mode=crop -->
+            <img src="{% static '/images/painting.jpg' %}" alt="Painting in the park"/>
+            <div class="event-info">
+                <a href="./event.html">
+                    <h2>Painting in the Park</h2>
+                    <p>Date: <span class="event-date">September 19, 2023</span></p>
+                    <p>Time: <span class="event-time">10:00 AM</span></p>
+                    <p>
+                        Location:
+                        <span class="event-location">Great Falls Meadows</span>
+                    </p>
+                </a>
+                <p>Description:</p>
+                <p class="event-description">
+                    Join us for a day of fun in the sun, painting the beautiful
+                    scenery in Great Falls Meadows
+                </p>
+            </div>
+        </div>
+        <!-- pickleball in arlington event card -->
+        <div class="event-card">
+            <!-- https://www.ussportscamps.com/media/images/pickleball/tips/what-is-pickleball-group-rally.jpg -->
+            <img src="{% static '/images/pickleball.jpg' %}" alt="Event Image"/>
+            <div class="event-info">
+                <a href="./event.html">
+                    <h2>Pickleball in Arlington</h2>
+                    <p>Date: <span class="event-date">September 27th, 2023</span></p>
+                    <p>Time: <span class="event-time">7:00 PM</span></p>
+                    <p>
+                        Location:
+                        <span class="event-location">Glebe Park, Arlington</span>
+                    </p>
+                </a>
+                <p>Description:</p>
+                <p class="event-description">
+                    Join us for some friendly yet competitive pickleball games. We
+                    will be playing 2v2 and winner stays on. Bring your own water!
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- footer -->
+<footer>
+    <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Company</a>
+        <a href="./listings_logged_out.html">Events</a>
+    </div>
+    <div class="copyright">&copy; Weekendr 2024</div>
+</footer>
+</body>
+</html>

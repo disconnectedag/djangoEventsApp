@@ -1,0 +1,124 @@
+{% extends "myEventsApp/base.html" %}
+{% load humanize %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/event.css' %}"/>
+    <script src="{% static '/js/changeEvent.js' %}"></script>
+    <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+{% endblock %}
+{% block page-title %}Event Details{% endblock %}
+{% block content %}
+    <div class="wrapper">
+
+        <a href="{% url 'myEventsApp:events_list' %}" class="back-btn">
+            <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+        </a>
+
+        <div class="title-info">
+            <h1>{{ event.title }}</h1>
+            {% if event.image %}
+                <img src="{{ event.image.url }}" alt="event image"/>
+            {% endif %}
+
+            <h3>Hosted by:</h3>
+            <div class="host">
+                <div class="avatar">
+                    <!-- https://i.pinimg.com/originals/98/11/44/981144e8816c11f9a36d381fdf417dc9.png -->
+                    <img src="{% static 'images/avatar_1.png' %}" alt="Host Avatar"/>
+                    <p>{{ event.host }}</p>
+                </div>
+                <h5>Posted {{ event.date_posted }}</h5>
+            </div>
+        </div>
+        <section class="event-details">
+            <h2>Event Information</h2>
+            <p>Date: {{ event.event_date.date }}</p>
+            <p>Time: {{ event.event_date.time }}</p>
+            <p id="address">
+                Address:
+                <em>
+                    {{ event.address }}
+                </em
+                >
+            </p>
+        </section>
+        <section class="event-description">
+            <h2>Description</h2>
+            <p>
+                {{ event.description }}
+            </p>
+        </section>
+        <h2>Attendees</h2>
+        <p><span id="attendees-counter">{{ event.attendees }}</span> are attending this event!</p>
+        <div class="event-attendees">
+            <div class="avatar">
+                <div class="attendee-avatar">
+                    <!-- https://images.squarespace-cdn.com/content/v1/571127b455598628154efb9b/59ea6b0d-374d-4dfd-88fa-8619b1cee52b/best+headshots+for+young+professionals+in+Albuquerque -->
+                    <img src="{% static 'images/avatar_2.jpg' %}" alt="Lisa Smith Avatar"/>
+                </div>
+                <p>Lisa Smith</p>
+            </div>
+            <div class="avatar">
+                <div class="attendee-avatar">
+                    <!-- https://www.hagopsphotography.com/wp-content/uploads/2021/04/male-business-headshot.jpg -->
+                    <img src="{% static 'images/avatar_3.jpeg' %}" alt="Rick Lee Avatar"/>
+                </div>
+                <p>Rick Lee</p>
+            </div>
+            <!-- Add more attendees as needed -->
+        </div>
+        <hr>
+        <div class="comments-section" data-profile-url="{% url 'users:profile' 'USERNAME' %}">
+            <h3>Comments...</h3>
+            {% if request.session.username %}
+                <form id="comment-form" data-ajax-url="{% url 'events:add-comment' %}" data-event-id="{{ event.id }}">
+                    {% csrf_token %}
+                    <label for="body">Leave a Comment</label>
+                    <textarea id="body"></textarea>
+                    <input type="submit" value="Add Comment"/>
+                </form>
+            {% endif %}
+            <div class="comments-container">
+                {% for comment in comments %}
+                    <div class="comment" id="comment-{{ comment.id }}">
+                    {% if request.session.username == comment.name or request.session.role == 'admin'%}
+                        <div class="admin-icons">
+                            <a href="{% url 'events:edit-comment' comment.id%}"
+                               data-comment-id="{{ comment.id }}" class="edit-comment">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                            <a data-ajax-url="{% url 'events:delete-comment'%}"
+                               data-comment-id="{{ comment.id }}" class="delete-comment">
+                            <i class="fa-solid fa-x fa-lg"></i></a>
+                        </div>
+
+                        {% endif %}
+                        <p><strong>
+                            <a href="{% url 'users:profile' comment.name %}">{{ comment.name }}</a>:</strong>
+                            {{ comment.body }}</p>
+                        <p>Posted {{ comment.time_posted|naturaltime }}</p>
+                    </div>
+                {% empty %}
+                    <p>No comments yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- sticks to the bottom of the container -->
+    <div class="sticky-runner">
+        <div class="sticky-info">
+            <h4></h4>
+            <p>
+                {{ event.title }} @ {{ event.location }}
+            </p>
+        </div>
+        <div class="sticky-btns">
+            <button id="bookmark-btn">
+                <i class="fa-regular fa-bookmark fa-2xl"></i>
+            </button>
+            <button class="sticky-button">Share</button>
+            <button class="sticky-button" data-ajax-url="{% url 'events:attend-event' %}" data-event-id="{{ event.id }}"
+                    id="attend-btn">Attend
+            </button>
+        </div>
+    </div>
+{% endblock %}

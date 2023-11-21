@@ -1,0 +1,57 @@
+{% extends "myEventsApp/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/create-event.css' %}"/>
+{% endblock %}
+{% block content %}
+    <main>
+        <div class="event-form">
+            <a href="{% url 'events:events_list' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+            </a>
+            <h2>Edit Event</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" value="{{ event.title }}" required maxlength="200"><br>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" required>{{ event.description }}</textarea><br>
+                </div>
+                <div class="form-group">
+                    <label for="host">Host:</label>
+                    <input id="host" name="host" value="{{ event.host }}" disabled><br>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" value="{{ event.location }}" required
+                           maxlength="100"><br>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" value="{{ event.address }}" required
+                           maxlength="100"><br>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_event">Date of Event:</label>
+                    <input type="datetime-local" id="date_of_event" name="date_of_event" value="{{ event.event_date }}"
+                           required><br>
+                </div>
+                <div class="form-group">
+                    <label for="attendees">Attendees:</label>
+                    <input type="number" id="attendees" name="attendees" value="{{ event.attendees }}" required><br>
+                </div>
+                <!-- Add more fields as needed to match your Event class attributes -->
+                <div class="form-group">
+                    <input id="ce-btn" type="submit" value="Save Changes"/>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+
+
+
+

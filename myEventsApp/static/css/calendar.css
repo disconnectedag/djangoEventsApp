@@ -1,0 +1,70 @@
+/* styles.css */
+
+/* Calendar widget container */
+.calendar-widget {
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Calendar header */
+.calendar-header {
+  display: flex;
+  gap: 1rem;
+  text-align: center;
+  padding: 10px;
+}
+
+.prev-month-btn,
+.next-month-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.current-month {
+  margin: 0;
+}
+
+/* Calendar table */
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Calendar table headers (day names) */
+.calendar th {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 5px;
+}
+
+/* Calendar table cells (days) */
+.calendar td {
+  text-align: center;
+  padding: 10px 5px;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.calendar td:hover {
+  background-color: hsl(0, 0%, 63%);
+  cursor: pointer;
+}
+/* Style specific days (e.g., weekends) */
+.calendar td:nth-child(1), /* Sunday */
+.calendar td:nth-child(7) /* Saturday */ {
+  color: #f00; /* Red */
+}
+
+.title-side-events {
+  margin-top: 1rem;
+  text-decoration: underline;
+}
+
+.events-display {
+  display: none;
+}

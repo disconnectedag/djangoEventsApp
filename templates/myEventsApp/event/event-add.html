@@ -1,0 +1,71 @@
+{% extends "myEventsApp/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load bootstrap4 %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/create-event.css' %}"/>
+{% endblock %}
+{% block page-title %}Create Event{% endblock %}
+{% block content %}
+    <main>
+        <div class="event-form">
+            <a href="{% url 'events:events_list' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left-long fa-xl"></i>
+            </a>
+            <h1>Create Event</h1>
+            <form method="POST" action="{% url "myEventsApp:create_event" %}" enctype="multipart/form-data">
+                {% csrf_token %}
+{#                <div class="form-group">#}
+{#                    <label for="event-title">Event Title</label>#}
+{#                    <input type="text" id="event-title" name="event-title" required/>#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="event-date-time">When?</label>#}
+{#                    <input#}
+{#                            type="datetime-local"#}
+{#                            id="event-date-time"#}
+{#                            name="event-date-time"#}
+{#                            required#}
+{#                    />#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="location">Where?</label>#}
+{#                    <input#}
+{#                            type="text"#}
+{#                            id="location"#}
+{#                            name="event-location"#}
+{#                            required#}
+{#                    />#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="event-description">Description</label>#}
+{#                    <textarea#}
+{#                            id="event-description"#}
+{#                            name="event-description"#}
+{#                            rows="4"#}
+{#                            required#}
+{#                    ></textarea>#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="event-image">Event Image</label>#}
+{#                    <input#}
+{#                            type="file"#}
+{#                            id="event-image"#}
+{#                            name="event-image"#}
+{#                            accept="image/*"#}
+{#                    />#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="attendees">Attendees</label>#}
+{#                    <input type="number" id="attendees" name="attendees"/>#}
+{#                </div>#}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <div class="form-group">
+                    <input id="ce-btn" type="submit" value="Create Event"/>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

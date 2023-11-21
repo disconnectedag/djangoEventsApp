@@ -1,0 +1,43 @@
+{% extends "myEventsApp/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}"/>
+{% endblock %}
+{% block page-title %}Admin Panel{% endblock %}
+
+{% block content %}
+    <div class="user-grid">
+    {% for user in users %}
+            <form method="POST" class="admin-form">
+             {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="form-control" name="display_username" value="{{ user.username }}"
+                           required disabled>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios1"
+                               value="registered_user"
+                               {% if user.details.role == "registered_user" %}checked{% endif %} >
+                        <label class="form-check-label" for="exampleRadios1">
+                            Regular User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleRadio" id="exampleRadios2"
+                               value="admin" {% if user.details.role == "admin" %}checked{% endif %} >
+                        <label class="form-check-label" for="exampleRadios2">
+                            Admin
+                        </label>
+                    </div>
+                <input type="hidden" name="username" value="{{ user.username }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Change Role</button>
+            </form>
+
+        {% empty %}
+        <p>No users yet</p>
+    {% endfor %}
+    </div>
+{% endblock %}
